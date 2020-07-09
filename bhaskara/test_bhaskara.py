@@ -1,22 +1,9 @@
-'''
-Teste de programa para fórmula de Bháskara
-'''
 from bhaskara import Bhaskara
 
-
 class TestBhaskara:
-    def testa_uma_raiz(self):
-        b = Bhaskara()
-        assert b.calcula_raizes(1, 0, 0) == (1, 0)
+    '''Test program to find the unknown in a second degree equation. '''
 
-    def testa_duas_raizes(self):
-        b = Bhaskara()
-        assert b.calcula_raizes(1, -5, 6) == (2, 3, 2)
-
-    def testa_zero_raizes(self):
-        b = Bhaskara()
-        assert b.calcula_raizes(10, 10, 10) == 0
-
-    def testa_raiz_negativa(self):
-        b = Bhaskara
-        assert b.calcula_raizes(10, 20, 10) == (1, -1)
+    def test_unique_root():
+        ''' Testing an unique root. '''
+        b = Bhaskara( )
+        assert b.get_roots(1, 0, 0) == (1, 0)
