@@ -15,8 +15,10 @@ class Bhaskara:
     def get_roots(self, a, b, c):
         ''' Receive three values and returns the roots found with bhaskara. '''
         delta = self.get_delta(a, b, c)
+        # Delta smaller than zero, there is not valid roots
         if delta < 0:
             return 0
+        # Delta equal zero, we hare one root, bigger than, two roots
         elif delta >= 0:
             x1 = (-b + sqrt(delta)) / (2 * a)
             if delta > 0:
