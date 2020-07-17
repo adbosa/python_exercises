@@ -5,22 +5,18 @@ class TestBhaskara:
     '''Test program to find the unknown in a second degree equation. '''
 
     @pytest.fixture
-    def b(self):
+    def bhaskara(self):
         return Bhaskara()
 
-    @pytest.mark.parametrize("x, y", [
-        (2, 4), (5, 2), (2, 6)
+    @pytest.mark.parametrize("a, b, c, roots", [
+        (1, 0, 0, (1, 0)),
+        (10, 10, 10, 0),
+        (1, -5, 6, (2, 3, 2)),
+        (10, 20, 10, (1, -1)),
+        (1, 8, -9, (2, 1, -9)),
+        (1, 12, -13, (2, 1, -13))
         ])
     
-    def test_unique_root(self, b):
+    def test_unique_root(self, bhaskara, a, b, c, roots):
         ''' Testing an unique root. '''
-        assert b.get_roots(x) == y
-
-
-
-        '''((1, 0, 0), (1, 0)),
-        ((10, 10, 10), 0),
-        ((1, -5, 6), (2, 3, 2)),
-        ((10, 20, 10), (1, -1)),
-        '''
-        
+        assert bhaskara.get_roots(a, b, c) == roots
