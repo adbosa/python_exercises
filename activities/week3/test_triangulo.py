@@ -32,3 +32,26 @@ class TestaTriangulo:
     def test_tipo_de_triangulo(self, lado_a, lado_b, lado_c, tipo):
         t = triangulo.Triangulo(lado_a, lado_b, lado_c)
         assert t.tipo_lado() == tipo
+
+    def test_se_triangulo_retangulo(self):
+        t = triangulo.Triangulo(3, 4, 5)
+        assert t.retangulo() == True
+
+    def test_se_triangulo_não_retangulo(self):
+        t = triangulo.Triangulo(1, 3, 5)
+        assert t.retangulo() == False
+
+    def test_triangulos_semelhantes_1(self):
+        t1 = triangulo.Triangulo(2, 2, 2)
+        t2 = triangulo.Triangulo(4, 4, 4)
+        assert t1.semelhantes(t2) == True
+
+    def test_triangulos_semelhantes_2(self):
+        t1 = triangulo.Triangulo(5, 5.83, 3)
+        t2 = triangulo.Triangulo(10, 11.66, 6)
+        assert t1.semelhantes(t2) == True
+
+    def test_triangulos_não_semelhantes(self):
+        t1 = triangulo.Triangulo(3, 7, 8)
+        t2 = triangulo.Triangulo(2, 2, 2)
+        assert t1.semelhantes(t2) == False

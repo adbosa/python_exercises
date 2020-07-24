@@ -31,3 +31,16 @@ class Triangulo:
         else:
             return 'escaleno'
     
+    def retangulo(self):
+        lados = self.ordena_numeros(self.a, self.b, self.c)
+        a, b, c = lados[2], lados[1], lados[0]
+        return a**2 is b**2 + c**2
+
+    def ordena_numeros(self, x, y, z):
+        return sorted([x, y, z])
+
+    def semelhantes(self, triangulo):
+        triangulo_1 = self.ordena_numeros(self.a, self.b, self.c)
+        triangulo_2 = self.ordena_numeros(triangulo.a, triangulo.b, triangulo.c)
+        
+        return triangulo_1[0] / triangulo_2[0] == triangulo_1[1] / triangulo_2[1] == triangulo_1[2] / triangulo_2[2]
