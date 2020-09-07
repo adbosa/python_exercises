@@ -3,7 +3,10 @@ class Rational:
         self.put(n, d)
 
     def __str__(self):
-        return "%d/%d"%(self.num, self.den)
+        if(self.den == 1): # If denominator is equal to one print only numerator
+            return f'{self.num}'
+        else:
+            return f'{self.num}/{self.den}'
 
     def get(self):
         return self.num, self.den
