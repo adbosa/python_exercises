@@ -46,19 +46,37 @@ class Rational:
         return Rational(n, d)
 
     def lcm(x, y):
-        '''Receives two integers and returns LCM between them.'''
+        '''Receives two numbers and returns the
+        Least Common Multiple between them.'''
         if x > y :
             greater = x
         else:
             greater = y
 
         while(True):
-            if(( greater % x == 0 ) and ( greater % y ==0)):
+            if(( greater % x == 0 ) and ( greater % y ==0 )):
                 lcm = greater
                 break
             greater += 1
 
         return lcm
+
+    def gcd(x, y):
+        ''' Receives two numbers and return the
+        Greatest Common Divisor between then. '''
+
+        if x > y:
+            greater = x
+        else:
+            greater = y
+
+        while(True):
+            if(( x % greater == 0 ) and ( y % greater == 0 )):
+                gcd = greater
+                break
+            greater -= 1
+
+        return gcd
 
 import pytest
 class Tests_Rational_Operations:
@@ -100,6 +118,22 @@ class Tests_Rational_Operations:
         den1 = 10
         den2 = 5
         assert Rational.lcm(den1, den2) == 10
+
+### GCD tests ###
+    def test_gcd_one(self):
+        num = 3
+        den = 7
+        assert Rational.gcd(num, den) == 1
+
+    def test_gcd_two(self):
+        num= 18
+        den = 60
+        assert Rational.gcd(num, den) == 6
+
+    def test_gcd_three(self):
+        num = 10
+        den = 5
+        assert Rational.gcd(num, den) == 5
 
 ### Additions tests ###
     def test_sum_of_rationals_1(self):
