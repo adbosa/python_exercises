@@ -4,15 +4,18 @@ class Rational:
 
     def __str__(self):
         if(self.den == 1): # If denominator is equal to one print only numerator
-            return f'{self.num}'
+            return f'{int(self.num)}'
         else:
-            return f'{self.num}/{self.den}'
+            return f'{int(self.num)}/{int(self.den)}'
 
     def get(self):
-        return self.num, self.den
+        if(self.den == 1):
+            return self.num
+        else:
+            return self.num, self.den
 
     def put(self, n = 0, d =1):
-        self.num, self.den = n, d
+        self.num, self.den = self.reducing(n, d)
 
     def mult(self, other):
         n = self.num * other.num
@@ -41,7 +44,7 @@ class Rational:
             n = self.num - other.num
             d = self.den
         else:
-            d = Rational.lcm(self.den, other.den)
+            D = Rational.lcm(self.den, other.den)
             n = ((d/self.den) * self.num + (d/other.den) * other.num)
         return Rational(n, d)
 
@@ -61,7 +64,13 @@ class Rational:
 
         return lcm
 
-    def gcd(x, y):
+    def reducing(self, num, den):
+        g = self.gcd(num, den) # Get the greatest common divisor
+        simple_num = num / g
+        simple_den = den / g
+        return simple_num, simple_den
+
+    def gcd(self, x, y):
         ''' Receives two numbers and return the
         Greatest Common Divisor between then. '''
 
@@ -156,3 +165,25 @@ class Tests_Rational_Operations:
         r1 = Rational(8, 5)
         r2 = Rational(3, 5)
         assert r1.sub(r2).get() == (5, 5)
+
+### Simplification tests
+    def test_simplification_positive_fraction_with_higher_numerator_one(self):
+        r1 = Rational(28, 20)
+        assert r1.get() == (7, 5)
+
+    def test_simplification_positive_fraction_with_higher_numerator_two(self):
+        r1 = Rational(750, 150)
+        assert r1.get() == (5)
+
+    def test_simplification_positive_fraction_with_higher_denominator(self):
+        r1 = Rational(63, 462)
+        assert r1.get() == (3, 22)
+
+    def test_simplification_negative_fraction(self):
+        r1 = Rational(-13, 26)
+        assert r1.get() == (-1, 2)
+
+    def test_simplification_irreducible_fraction(self):
+        r1 = Rational(3, 8)
+        assert r1.get() == (3, 8)
+
