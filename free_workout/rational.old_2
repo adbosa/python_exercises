@@ -34,7 +34,7 @@ class Rational:
         if(self.den == other.den): # if the demominators are equal
             n = self.num + other.num
             d = self.den
-        else:                      # if don't  
+        else:                      # if don't
             d = Rational.lcm(self.den, other.den)
             n = ((d/self.den) * self.num + (d/other.den) * other.num)
         return Rational(n, d)
