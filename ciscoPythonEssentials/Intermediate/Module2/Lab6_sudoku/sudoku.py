@@ -21,16 +21,18 @@ def game_validation(board):
             column.append(str(line)[i])
         if not validate_group(''.join(column)): return False
     ### Valid sub-square
-    for i in range(9):
-        print()
-        for j in range(3):
-            print(str(board[i])[j], end="")
-        if (i + 1) % 3 == 0: print()
-    print()
-
-
-
-    return None
+    begin, end = 0, 3
+    sub_square = ""
+    while end <= 9:
+        for i in range(9):
+            for j in range(3):
+                sub_square += str(board[i])[j]
+            if (i + 1) % 3 == 0:
+                if not validate_group(sub_square): return False
+                sub_square = ""
+        begin += 3
+        end   += 3
+    return True
 
 def validate_group(number_list):
     number_list = str(number_list)
