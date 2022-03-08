@@ -16,6 +16,13 @@ class Queue:
         except IndexError:
             raise QueueError
 
+    def isEmpty(self):
+        if len(self.__list) != 0:
+            return False
+        else:
+            return True
+        
+
 
 ### Test ###
 if __name__ == "__main__":
@@ -23,9 +30,8 @@ if __name__ == "__main__":
     que.put(1)
     que.put("dog")
     que.put(False)
-    try:
-        for i in range(4):
+    for i in range(4):
+        if not que.isEmpty():
             print(que.get())
-    except:
-        print("Queue error")
-
+        else:
+            print("Queue empty")
