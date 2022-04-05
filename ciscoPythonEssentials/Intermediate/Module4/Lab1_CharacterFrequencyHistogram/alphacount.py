@@ -1,37 +1,34 @@
 #!/usr/bin/python
 from os import strerror
 
-#file = input('Enter the name of the file containing the text to parse: ')
-file = 'test2'
+file = input('Enter the name of the file containing the text to parse: ')
+#file = 'test2'
+recurrence = {}
 
 try:
     stream = open(file, 'rt')
-    print(stream.readline())
+    for line in stream:
+        for letter in line:
+            if letter.isalpha():
+                if letter.lower() in recurrence:
+                    recurrence[letter.lower()] += 1
+                else:
+                    recurrence[letter.lower()] = 1
+    stream.close()
 except IOError as e:
     print('I/O error occurred:', strerror(e.errno))
 
+for key, value in sorted(recurrence.items()):
+    print(key + '| ' + '===' * value) 
 
-## Pede o nome do arquivo para o usuario
-## Separa linha por linha do arquivo
-## Varre cada caractere da linha
-    ## Verifica se é uma letra ou acentuação
-        ## Converter os diacríticos
-        ## Padroniza tudo em minusculo
-## Criar um dicionário para armazenar os dados
-## Verificar se a letra já existe no dicionário
-    ## Criar uma nova entrada se não existir
-    ## Somar +1 nos que já existirem
-## Ordenar pelo alfabeto os dados
-## Criar um arquivo de saida
-## Escrever um histograma com o resultado
+highest = recurrence[max(recurrence, key=recurrence.get)]
+print('  ' + '-'*(highest*3))
+print(' '* 4, end='')
 
-
-
-
-
-
-
-
-
-
+for pos in range(highest):
+    if len(str(pos)) < 2:
+        mark = '0' + str(pos+1)
+    else:
+        mark = str(pos+1)
+    print(mark, end=' ')
 
