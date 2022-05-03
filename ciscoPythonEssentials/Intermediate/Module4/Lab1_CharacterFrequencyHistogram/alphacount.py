@@ -71,8 +71,8 @@ def build_histogram(dic, sorted_by='alpha'):
 def write_output(histogram, filename):
     filename = filename.split('.')[0]
     output_file = open(filename + '.hist', 'wt')
-
-
+    for line in histogram:
+        output_file.write(line + '\n')
     output_file.close()
     pass
 
@@ -88,11 +88,11 @@ if __name__ == '__main__':
     print('Analyzing the text below:')
     for line in open(file, 'rt'):
         print(line)
-    '''
 
     print('Histogram:\n')
 
     hist = build_histogram(recurrence(file), 'occ')
     for line in hist:
         print(line)
+    '''
 
