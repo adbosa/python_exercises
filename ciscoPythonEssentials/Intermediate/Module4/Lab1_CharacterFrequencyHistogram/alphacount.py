@@ -2,6 +2,11 @@
 from os import strerror
 
 def recurrence(filename):
+    ''' text file >> dict
+    Take a text file and in order of occurrence and
+    create a dictionary counting how many times each
+    character appears.
+    '''
     recurrence = {}
     try:
         stream = open(filename, 'rt')
@@ -18,10 +23,18 @@ def recurrence(filename):
     return recurrence
 
 def sort_alphabetically(dic):
+    ''' dict >> dict
+    Receive a dictionary and reorganize it
+    in the alphabetical order (keys).
+    '''
     return sorted(dic.items())
 
 def sort_by_recurrence(dic):
-    pass
+    ''' dict >> dict
+    Receive a dictionary and reorganize it
+    in the descending order of occurence (values).
+    '''
+    return dict(sorted(dic.items(), key=lambda item: item[1], reverse=True))
 
 def build_histogram(dic, sorted_by='alpha'):
     pass
