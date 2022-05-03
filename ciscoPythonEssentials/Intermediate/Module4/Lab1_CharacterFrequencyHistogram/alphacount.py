@@ -27,7 +27,7 @@ def sort_alphabetically(dic):
     Receive a dictionary and reorganize it
     in the alphabetical order (keys).
     '''
-    return sorted(dic.items())
+    return dict(sorted(dic.items()))
 
 def sort_by_recurrence(dic):
     ''' dict >> dict
@@ -37,31 +37,47 @@ def sort_by_recurrence(dic):
     return dict(sorted(dic.items(), key=lambda item: item[1], reverse=True))
 
 def build_histogram(dic, sorted_by='alpha'):
+    ''' dict >> print
+    Receive a dictonary and print a histogram
+    '''
+
+    if sorted_by == 'alpha':
+        dic = sort_alphabetically(dic)
+    elif sorted_by == 'occ':
+        dic = sort_by_recurrence(dic)
+    else:
+        print('Error:\nInvalid parameter.')
+        return
+
+
+    for key, value in dic.items():
+        print(key + '|' + '===' * value)
+    
+    highest = dic[max(dic, key=dic.get)]
+    print('  ' + '--' + '-' * (highest*3))
+    print(' ' + '00 ', end='')
+
+    for position in range(highest):
+        if position < 9:
+            mark = '0' + str(position + 1)
+        else:
+            mark = str(position + 1)
+        print(mark, end=' ')
+
     pass
 
 def write_output(histogram, filename):
     pass
 
 
-"""
-for key, value in sorted(recurrence.items()):
-print(key + '| ' + '===' * value) 
-
-highest = recurrence[max(recurrence, key=recurrence.get)]
-print('  ' + '-'*(highest*3))
-print(' '* 4, end='')
-
-for pos in range(highest):
-    if len(str(pos)) < 2:
-        mark = '0' + str(pos+1)
-    else:
-        mark = str(pos+1)
-    print(mark, end=' ')
-"""
 if __name__ == '__main__':
     #file = input('Enter the name of the file containing the text to parse: ')
-    file = 'test2'
+    file = 'test1'
+    '''
     print('Result by alphabeticall order:')
     print(sort_alphabetically(recurrence(file)))
     print('Result by order of occurrence:')
     print(sort_by_recurrence(recurrence(file)))
+    '''
+    build_histogram(recurrence(file), 'occ')
+
