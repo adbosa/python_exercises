@@ -40,7 +40,7 @@ def build_histogram(dic, sorted_by='alpha'):
     ''' dict >> print
     Receive a dictonary and print a histogram
     '''
-
+    # Set dictionary sorting
     if sorted_by == 'alpha':
         dic = sort_alphabetically(dic)
     elif sorted_by == 'occ':
@@ -48,36 +48,51 @@ def build_histogram(dic, sorted_by='alpha'):
     else:
         print('Error:\nInvalid parameter.')
         return
-
-
+    
+    # Store the histogram in a list
+    histogram = []
     for key, value in dic.items():
-        print(key + '|' + '===' * value)
+        histogram.append((key + '|' + '===' * value))
     
     highest = dic[max(dic, key=dic.get)]
-    print('  ' + '--' + '-' * (highest*3))
-    print(' ' + '00 ', end='')
+    histogram.append('  ' + '--' + '-' * (highest*3))
+    
+    last_line = ' 00 '
 
     for position in range(highest):
         if position < 9:
             mark = '0' + str(position + 1)
         else:
             mark = str(position + 1)
-        print(mark, end=' ')
-
-    pass
+        last_line += mark + ' '
+    histogram.append(last_line)
+    return histogram
 
 def write_output(histogram, filename):
+    filename = filename.split('.')[0]
+    output_file = open(filename + '.hist', 'wt')
+
+
+    output_file.close()
     pass
 
 
 if __name__ == '__main__':
     #file = input('Enter the name of the file containing the text to parse: ')
-    file = 'test1'
+    file = 'test2'
     '''
     print('Result by alphabeticall order:')
     print(sort_alphabetically(recurrence(file)))
     print('Result by order of occurrence:')
     print(sort_by_recurrence(recurrence(file)))
+    print('Analyzing the text below:')
+    for line in open(file, 'rt'):
+        print(line)
     '''
-    build_histogram(recurrence(file), 'occ')
+
+    print('Histogram:\n')
+
+    hist = build_histogram(recurrence(file), 'occ')
+    for line in hist:
+        print(line)
 
